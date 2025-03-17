@@ -31,3 +31,5 @@ function getFoodPics(amount) {
     gestureBox.style.backgroundImage = "url('"+ imgList[imageIndex] +"')";
 }
 
+
+
