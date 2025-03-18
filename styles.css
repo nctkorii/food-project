@@ -19,5 +19,7 @@ body {
     #gestureBox {
         width: 90%;
         height: 250px;
+        background-size: cover;
+        background-repeat: no-repeat;
     }
 }
