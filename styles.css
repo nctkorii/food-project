@@ -5,11 +5,13 @@ body {
     background-color: #0443DB;
     color: white;
     padding: 20px;
+    background-image: url('https://www.transparenttextures.com/patterns/food.png');
 }
 
 h1 {
-    font-size: 2em;
+    font-size: 7em;
     margin-bottom: 20px;
+    font-family: "Barriecito", system-ui;
 }
 
 #gestureBox {
@@ -29,9 +31,7 @@ h1 {
     background-repeat: no-repeat;
 }
 
-#gestureBox:hover {
-    background-color: #89DB04;
-}
+
 
 button {
     background-color: #89DB04;
@@ -43,6 +43,7 @@ button {
     cursor: pointer;
     border-radius: 10px;
     transition: background 0.3s ease-in-out;
+    font-family: "Barriecito", system-ui;
 }
 
 button:hover {
@@ -83,6 +84,11 @@ button:hover {
     button {
         width: 90%;
     }
+    
+    #ad{
+        height: 80%;
+        width: 40%;
+    }
 }
 
 
@@ -101,6 +107,10 @@ button:hover {
     h1 {
         font-size: 1.8rem;
     }
+    #ad{
+        height: 80%;
+        width: 40%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -117,5 +127,9 @@ button:hover {
 
     h1 {
         font-size: 1.5rem;
+    }
+    #ad{
+        height: 80%;
+        width: 40%;
     }
 }

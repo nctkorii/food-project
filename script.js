@@ -6,6 +6,7 @@ const modeToggleBtn = document.getElementById("mode-toggle");
 let numPics = 0;
 let startX, startY, endX, endY;
 let imageIndexLength = 0;
+const adImage = document.getElementById("ad");
 
 // Sound effects
 const swipeSound = new Audio("swipe.mp3");
@@ -47,6 +48,7 @@ function getFoodPics(amount) {
 FoodBtn.addEventListener("touchstart", function(){
     getFoodPics(15);
     FoodBtn.style.display = "none";
+    adImage.style.display = "none";
 });
 
 // Detects swipe 
