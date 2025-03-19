@@ -2,17 +2,24 @@
 const FoodBtn = document.getElementById("food-btn");
 const gestureBox = document.getElementById("gestureBox");
 const output = document.getElementById("output");
+const modeToggleBtn = document.getElementById("mode-toggle");
 let numPics = 0;
 let startX, startY, endX, endY;
-let imageIndexLength = 0
+let imageIndexLength = 0;
 
-// Food APi
+// Sound effects
+const swipeSound = new Audio("swipe.mp3");
+const clickSound = new Audio("click.mp3");
+
+// Food API
 
 // Update screen
 function updateScreen(){
-    gestureBox.style.backgroundImage = "url('"+ imgList[imageIndex]+"')"
-    console.log(imgList[imageIndex])
-    imageIndexLength = imageIndex.length
+    gestureBox.style.backgroundImage = "url('"+ imgList[imageIndex]+"')";
+    gestureBox.style.backgroundSize = "cover";
+    gestureBox.style.backgroundPosition = "center";
+    console.log(imgList[imageIndex]);
+    imageIndexLength = imgList.length;
 }
 
 // Function to fetch multiple food images from the API
@@ -30,11 +37,11 @@ function getFoodPics(amount) {
 
   Promise.all(requests).then((images) => { // Wait for all fetch requests to complete
     imgList = images; // Store the fetched images in a list
-    imageIndex = 0; // Start at the first image in the list
+    imageIndex = Math.floor(Math.random() * numPics); // Start at a random image
     updateScreen(); // Display the first image
+    clickSound.play(); // Play click sound when generating images
   });
 }
-
 
 // Touch Events
 FoodBtn.addEventListener("touchstart", function(){
@@ -42,7 +49,7 @@ FoodBtn.addEventListener("touchstart", function(){
     FoodBtn.style.display = "none";
 });
 
-//detects swipe 
+// Detects swipe 
 gestureBox.addEventListener("touchstart", function(event) {
     startX = event.changedTouches[0].clientX;
     startY = event.changedTouches[0].clientY;
@@ -55,28 +62,36 @@ gestureBox.addEventListener("touchend", function(event) {
 
     let diffX = endX - startX;
     let diffY = endY - startY;
-    let imageIndexLength = imageIndex.length
+    let imageIndexLength = imgList.length;
     
     if (Math.abs(diffX) > Math.abs(diffY)) {
-
-
         if (diffX > 0) {
-            console.log("User Swiped right")
+            console.log("User Swiped Right");
             output.textContent = "You've Swiped Right";
-            if (imageIndex <= numPics) {
-              imageIndex += 1;
+            swipeSound.play();
+            if (numPics > 0) {
+                imageIndex = Math.floor(Math.random() * numPics);
+                updateScreen();
+            } else {
+                output.textContent = "You've reached the end!";
             }
-            updateScreen()
-            let length = imageIndex.length;
         } else {
-            console.log("User Swiped left")
+            console.log("User Swiped Left");
             output.textContent = "You've Swiped Left";
-
-          if (imageIndex > 0) {
-              imageIndex -= 1;
-              updateScreen();
+            swipeSound.play();
+            if (numPics > 0) {
+                imageIndex = Math.floor(Math.random() * numPics);
+                updateScreen();
+            } else {
+                output.textContent = "You've reached the beginning!";
             }
         }
     }
 });
-console.log(imageIndexLength)
+console.log(imageIndexLength);
+
+// Dark Mode Toggle
+modeToggleBtn.addEventListener("click", function() {
+    document.body.classList.toggle("dark-mode");
+    clickSound.play();
+});
